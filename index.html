@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柳州“嗜辣探酸”美食之旅 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #fdfbf7;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .active-tab {
+            border-bottom: 3px solid #ea580c;
+            color: #ea580c;
+            font-weight: 700;
+        }
+        
+        .route-line::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            bottom: 1rem;
+            left: 1.25rem;
+            width: 2px;
+            border-left: 2px dashed #d1d5db;
+            z-index: 0;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="text-stone-800 antialiased selection:bg-orange-200 selection:text-orange-900">
+
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">柳</div>
+                    <span class="font-bold text-xl tracking-tight text-stone-800">食在柳州 <span class="text-orange-600">2026</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-stone-500">
+                    <a href="#itinerary" class="hover:text-orange-600 transition-colors">每日行程</a>
+                    <a href="#checklist" class="hover:text-orange-600 transition-colors">必吃清单</a>
+                    <a href="#guide" class="hover:text-orange-600 transition-colors">生存法则</a>
+                    <a href="#overview" class="hover:text-orange-600 transition-colors">数据分析</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="bg-gradient-to-r from-orange-50 to-amber-50 py-12 px-4 border-b border-orange-100">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4">🍜 柳州“嗜辣探酸”美食之旅</h1>
+            <p class="text-lg text-stone-600 max-w-2xl mx-auto mb-6">四天三夜终极指南 | 2026.03.06 - 03.09</p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm font-medium">
+                <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-stone-200">🌡️ 15-22℃ (紫荆花季)</span>
+                <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-stone-200">✈️ 建议上海直飞</span>
+                <span class="bg-white px-4 py-2 rounded-full shadow-sm border border-stone-200">🏨 住五星步行街</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- SECTION 1: Interactive Itinerary -->
+        <section id="itinerary">
+            <div class="mb-6 text-2xl font-bold text-stone-800 border-l-4 border-orange-500 pl-3">每日行程详解</div>
+            <div class="bg-white rounded-xl card-shadow overflow-hidden border border-stone-100">
+                <div class="flex overflow-x-auto border-b border-stone-200 bg-stone-50">
+                    <button onclick="switchDay(1)" id="tab-day1" class="day-tab flex-1 min-w-[100px] py-4 text-center font-medium active-tab transition-colors">Day 1</button>
+                    <button onclick="switchDay(2)" id="tab-day2" class="day-tab flex-1 min-w-[100px] py-4 text-center font-medium transition-colors">Day 2</button>
+                    <button onclick="switchDay(3)" id="tab-day3" class="day-tab flex-1 min-w-[100px] py-4 text-center font-medium transition-colors">Day 3</button>
+                    <button onclick="switchDay(4)" id="tab-day4" class="day-tab flex-1 min-w-[100px] py-4 text-center font-medium transition-colors">Day 4</button>
+                </div>
+                <div class="p-4 md:p-8 min-h-[400px] bg-stone-50/30">
+                    <div id="day-content" class="relative route-line space-y-0">
+                        <!-- Content via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Checklist & Tips -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <section id="checklist" class="lg:col-span-2">
+                <div class="mb-4 text-2xl font-bold text-stone-800 border-l-4 border-orange-500 pl-3">必吃通关清单</div>
+                <div class="bg-white rounded-xl card-shadow border border-stone-100 p-6">
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm font-medium mb-2">
+                            <span class="text-stone-600">探索进度</span>
+                            <span id="progress-text" class="text-orange-600 font-bold">0%</span>
+                        </div>
+                        <div class="w-full bg-stone-100 rounded-full h-2.5">
+                            <div id="progress-bar" class="bg-orange-500 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
+                        <button onclick="filterFood('all')" class="filter-btn px-4 py-1.5 bg-orange-100 text-orange-700 rounded-full text-xs font-bold transition-colors">全部</button>
+                        <button onclick="filterFood('noodle')" class="filter-btn px-4 py-1.5 bg-stone-100 text-stone-600 rounded-full text-xs font-bold transition-colors">粉类</button>
+                        <button onclick="filterFood('snack')" class="filter-btn px-4 py-1.5 bg-stone-100 text-stone-600 rounded-full text-xs font-bold transition-colors">甜品小吃</button>
+                        <button onclick="filterFood('night')" class="filter-btn px-4 py-1.5 bg-stone-100 text-stone-600 rounded-full text-xs font-bold transition-colors">夜宵大菜</button>
+                    </div>
+
+                    <div id="food-list" class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[500px] overflow-y-auto custom-scrollbar pr-2"></div>
+                </div>
+            </section>
+
+            <section id="guide" class="space-y-6">
+                <div class="text-2xl font-bold text-stone-800 border-l-4 border-orange-500 pl-3">生存法则</div>
+                <div class="space-y-4">
+                    <div class="bg-orange-50 rounded-xl p-5 border border-orange-100">
+                        <h3 class="font-bold text-orange-800 mb-2 flex items-center gap-2">🌶️ 点单公式</h3>
+                        <p class="text-sm text-stone-600">微辣是最后的底线。必加：<span class="font-bold">炸蛋</span>、腐竹、鸭脚。</p>
+                    </div>
+                    <div class="bg-blue-50 rounded-xl p-5 border border-blue-100">
+                        <h3 class="font-bold text-blue-800 mb-2 flex items-center gap-2">💊 肠胃护理</h3>
+                        <p class="text-sm text-stone-600">重油重辣。随身带益生菌。每顿粉后配一碗木薯羹中和。</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SECTION 3: Overview Dashboard -->
+        <section id="overview" class="animate-fade-in pt-8 border-t border-stone-200">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-800 border-l-4 border-orange-500 pl-3">旅程风味概览</h2>
+                <p class="mt-2 text-stone-600">数据洞察及活动分配参考。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl card-shadow border border-stone-100">
+                    <h3 class="text-lg font-semibold text-stone-700 mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-orange-500 rounded-full"></span>味蕾风味雷达
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="flavorRadarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl card-shadow border border-stone-100">
+                    <h3 class="text-lg font-semibold text-stone-700 mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-blue-500 rounded-full"></span>行程活动分布
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="activityDoughnutChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-900 text-stone-500 py-10 text-center text-xs">
+        <p class="mb-2">🍜 柳州美食短途游规划 · 2026</p>
+        <p>上海出发 | 3月6日 - 3月9日</p>
+    </footer>
+
+    <script>
+        const itineraryData = {
+            1: { title: "Day 1: 初到柳州", keyword: "第一口汤头、落日全景", events: [
+                { time: "12:00", activity: "抵达柳州白莲机场", location: "白莲机场", type: "transport", desc: "开启柳州美食之旅", nextDrive: "约40分钟 | 18.5km", nextWalk: "不建议步行 | 18.5km" },
+                { time: "13:00", activity: "入住五星步行街酒店", location: "市中心", type: "transport", desc: "办理入住，轻装上阵", nextDrive: "约15分钟 | 6.2km", nextWalk: "约75分钟 | 6.2km" },
+                { time: "14:00", activity: "首餐：西环肥仔螺蛳粉", location: "西环路", type: "food", desc: "感受老字号炸蛋的浸润", nextDrive: "约15分钟 | 5.8km", nextWalk: "约70分钟 | 5.8km" },
+                { time: "17:30", activity: "马鞍山公园看全景", location: "马鞍山", type: "sight", desc: "建议18:00左右等亮灯", nextDrive: "约20分钟 | 7.5km", nextWalk: "约90分钟 | 7.5km" },
+                { time: "20:00", activity: "胜利烧烤城宵夜", location: "胜利路", type: "night", desc: "卢姐炒冰和烧烤是绝配" }
+            ]},
+            2: { title: "Day 2: 菜市与风情", keyword: "市井烟火、最美公园", events: [
+                { time: "09:00", activity: "青云民生集市", location: "青云路", type: "food", desc: "体验柳州早餐灵魂：露水汤圆、糯米饭", nextDrive: "约15分钟 | 4.8km", nextWalk: "约58分钟 | 4.8km" },
+                { time: "11:00", activity: "柳州工业博物馆", location: "柳东路", type: "sight", desc: "复古蒸汽机车出片率极高", nextDrive: "约12分钟 | 4.2km", nextWalk: "约50分钟 | 4.2km" },
+                { time: "14:00", activity: "二餐：阿姣/曹妹螺蛳粉", location: "城中区", type: "food", desc: "对比不同流派的鲜灵感", nextDrive: "约18分钟 | 7.2km", nextWalk: "约85分钟 | 7.2km" },
+                { time: "16:00", activity: "大龙潭公园消食", location: "龙潭路", type: "sight", desc: "3月紫荆花开，宛如仙境", nextDrive: "约12分钟 | 3.5km", nextWalk: "约42分钟 | 3.5km" },
+                { time: "19:00", activity: "肥螺庄鸭脚煲", location: "市中心", type: "night", desc: "鸭脚软糯，汤汁鲜美", nextDrive: "约12分钟 | 3.5km", nextWalk: "约42分钟 | 3.5km" },
+                { time: "21:00", activity: "窑埠古镇夜景", location: "窑埠古镇", type: "sight", desc: "柳江边的璀璨灯影" }
+            ]},
+            3: { title: "Day 3: 深度扫荡", keyword: "糖水文化、水路环江", events: [
+                { time: "09:30", activity: "金鱼巷 CityWalk", location: "金鱼巷", type: "sight", desc: "寻找文艺小店与地道小摊", nextDrive: "约8分钟 | 1.8km", nextWalk: "约22分钟 | 1.8km" },
+                { time: "11:30", activity: "水上巴士环江游", location: "南车渡码头", type: "transport", desc: "2元钱领略柳江风光", nextDrive: "约12分钟 | 3.2km", nextWalk: "约38分钟 | 3.2km" },
+                { time: "14:30", activity: "木薯羹与凉豆腐", location: "韦韦甜品", type: "snack", desc: "Q弹木薯，甜而不腻", nextDrive: "约15分钟 | 5.5km", nextWalk: "约65分钟 | 5.5km" },
+                { time: "18:00", activity: "牛杂火锅/簸箕肉", location: "新实惠", type: "food", desc: "凉拌牛杂是真正的当地吃法", nextDrive: "约5分钟 | 1.2km", nextWalk: "约15分钟 | 1.2km" },
+                { time: "21:00", activity: "谢民水果酸", location: "市中心", type: "snack", desc: "酸辣咸甜，回味无穷" }
+            ]},
+            4: { title: "Day 4: 伴手礼返程", keyword: "最后一碗、满载而归", events: [
+                { time: "09:00", activity: "最后一碗：阿姣螺蛳粉", location: "酒店附近", type: "food", desc: "把柳州的辣味留在记忆里", nextDrive: "约10分钟 | 3.0km", nextWalk: "约36分钟 | 3.0km" },
+                { time: "10:30", activity: "超市大采购", location: "城中区", type: "transport", desc: "买袋装好欢螺、螺霸王和酸笋", nextDrive: "约40分钟 | 19.2km", nextWalk: "不建议步行 | 19.2km" },
+                { time: "13:00", activity: "前往白莲机场", location: "机场", type: "transport", desc: "飞回上海，结束旅程" }
+            ]}
+        };
+
+        const foodList = [
+            { id: 1, name: "西环肥仔/聚宝螺蛳粉", type: "noodle" },
+            { id: 2, name: "大华干捞粉", type: "noodle" },
+            { id: 3, name: "胜利烧烤(炒田螺)", type: "night" },
+            { id: 4, name: "卢姐炒冰", type: "snack" },
+            { id: 5, name: "青云集市(糯米饭/汤圆)", type: "snack" },
+            { id: 6, name: "凤张/曹妹螺蛳粉", type: "noodle" },
+            { id: 7, name: "肥螺庄鸭脚煲", type: "night" },
+            { id: 8, name: "凉拌牛杂+切粉", type: "night" },
+            { id: 9, name: "韦韦木薯羹/豆花", type: "snack" },
+            { id: 10, name: "酸嘢(腌水果)", type: "snack" },
+            { id: 11, name: "融水酸汤鱼/簸箕肉", type: "night" },
+            { id: 12, name: "阿姣螺蛳粉(甜口)", type: "noodle" }
+        ].map(i => ({...i, checked: false}));
+
+        let currentFilter = 'all';
+
+        function initCharts() {
+            const ctxRadar = document.getElementById('flavorRadarChart').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['辣', '酸', '鲜', '臭', '甜', '烫'],
+                    datasets: [{
+                        data: [9, 8, 7, 8, 5, 9],
+                        backgroundColor: 'rgba(234, 88, 12, 0.2)',
+                        borderColor: 'rgb(234, 88, 12)',
+                        pointBackgroundColor: 'rgb(234, 88, 12)',
+                    }]
+                },
+                options: { maintainAspectRatio: false, scales: { r: { suggestedMin: 0, suggestedMax: 10, ticks: { display: false } } }, plugins: { legend: { display: false } } }
+            });
+
+            const ctxDoughnut = document.getElementById('activityDoughnutChart').getContext('2d');
+            new Chart(ctxDoughnut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['地道美食', '城市探索', '交通往返', '休闲休息'],
+                    datasets: [{
+                        data: [35, 30, 10, 25],
+                        backgroundColor: ['#ea580c', '#3b82f6', '#a8a29e', '#fed7aa'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+
+        function switchDay(dayId) {
+            document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active-tab', 'text-orange-600'));
+            const active = document.getElementById(`tab-day${dayId}`);
+            active.classList.add('active-tab', 'text-orange-600');
+
+            const content = document.getElementById('day-content');
+            const data = itineraryData[dayId];
+            let html = `<div class="mb-8 pl-10 animate-fade-in"><h3 class="text-xl font-bold">${data.title}</h3><p class="text-orange-600 text-sm font-bold">${data.keyword}</p></div>`;
+
+            data.events.forEach((e, idx) => {
+                const icon = { food: '🍜', sight: '📸', night: '🌙', snack: '🍧', transport: '🚗' }[e.type] || '📍';
+                
+                html += `
+                    <div class="relative flex items-start gap-4 pb-4 animate-fade-in" style="animation-delay: ${idx * 50}ms">
+                        <div class="h-10 w-10 min-w-[40px] rounded-full bg-white border-2 border-orange-500 flex items-center justify-center z-10 text-lg shadow-sm">
+                            ${icon}
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-white p-4 rounded-xl border border-stone-200 hover:border-orange-300 transition-all card-shadow">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-xs font-bold text-stone-400 font-mono tracking-tighter">${e.time}</span>
+                                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-stone-100 text-stone-500 border border-stone-200">📍 ${e.location}</span>
+                                </div>
+                                <h4 class="font-bold text-stone-800">${e.activity}</h4>
+                                <p class="text-stone-500 text-xs mt-1 leading-relaxed">${e.desc}</p>
+                            </div>
+                            ${e.nextDrive ? `
+                            <div class="py-4 pl-1 flex flex-col gap-2">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-1 h-1 bg-stone-300 rounded-full"></div>
+                                    <div class="text-[10px] font-bold text-stone-400 bg-stone-100 px-2 py-0.5 rounded-full flex items-center gap-1 italic">
+                                        🚗 驾车 ${e.nextDrive}
+                                    </div>
+                                    <div class="text-[10px] font-bold text-stone-400 bg-orange-50 px-2 py-0.5 rounded-full flex items-center gap-1 italic">
+                                        🚶 步行 ${e.nextWalk}
+                                    </div>
+                                    <div class="flex-1 border-t border-dashed border-stone-200"></div>
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            content.innerHTML = html;
+        }
+
+        function filterFood(type) {
+            currentFilter = type;
+            renderChecklist();
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const isMatch = (type === 'all' && btn.innerText === '全部') || 
+                                (type === 'noodle' && btn.innerText === '粉类') ||
+                                (type === 'snack' && btn.innerText === '甜品小吃') ||
+                                (type === 'night' && btn.innerText === '夜宵大菜');
+                if(isMatch) {
+                    btn.classList.add('bg-orange-100', 'text-orange-700');
+                    btn.classList.remove('bg-stone-100', 'text-stone-600');
+                } else {
+                    btn.classList.remove('bg-orange-100', 'text-orange-700');
+                    btn.classList.add('bg-stone-100', 'text-stone-600');
+                }
+            });
+        }
+
+        function renderChecklist() {
+            const list = document.getElementById('food-list');
+            const filtered = foodList.filter(i => currentFilter === 'all' || i.type === currentFilter);
+            list.innerHTML = filtered.map(i => `
+                <div class="flex items-center p-3 rounded-lg border bg-stone-50 cursor-pointer hover:bg-white transition-all ${i.checked ? 'border-orange-200 bg-orange-50/30' : 'border-stone-100'}" onclick="toggleFood(${i.id})">
+                    <div class="h-5 w-5 rounded border ${i.checked ? 'bg-orange-500 border-orange-500' : 'bg-white border-stone-300'} flex items-center justify-center mr-3">
+                        ${i.checked ? '<span class="text-white text-[10px] font-bold">✓</span>' : ''}
+                    </div>
+                    <span class="text-sm font-medium ${i.checked ? 'text-stone-400 line-through' : 'text-stone-700'}">${i.name}</span>
+                </div>
+            `).join('');
+            const totalChecked = foodList.filter(i => i.checked).length;
+            const progress = Math.round((totalChecked / foodList.length) * 100);
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').innerText = progress + '%';
+        }
+
+        function toggleFood(id) {
+            const item = foodList.find(i => i.id === id);
+            item.checked = !item.checked;
+            renderChecklist();
+        }
+
+        window.onload = () => {
+            initCharts();
+            switchDay(1);
+            filterFood('all');
+        };
+    </script>
+    <!-- Map Indicator logic: 
+         - Added walking time (nextWalk) and distances.
+         - Short walkable distances (e.g. Day 3 Xinhuihui to Center) highlight walking as a viable alternative.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</body>
+</html>
