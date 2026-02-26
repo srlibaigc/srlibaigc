@@ -1,16 +1,53 @@
-## Hi there 👋
+<p align="center">
+<i>"生活不止诗和远方，还有那一碗带臭味的螺蛳粉。"</i>
+</p>
 
-<!--
-**srlibaigc/srlibaigc** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+# 🍜 柳州“嗜辣探酸”美食之旅 · 2026
 
-Here are some ideas to get you started:
+### ✈️ 上海 → 柳州 | 03.06 - 03.09
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+> [!TIP]
+> **[👉 点击此处查看全交互式版本](https://srlibaigc.github.io/srlibaigc/)**
+
+---
+
+## 📊 旅程概览 / Trip Stats
+
+| **维度** | **指标** | **说明** |
+| :--- | :--- | :--- |
+| **风味强度** | 🌶️🌶️🌶️🌶️🌶️ | 挑战重辣，肠胃药备好 |
+| **主要目标** | 螺蛳粉横向测评 | 涵盖老字号、甜口、重口三类 |
+| **活动分配** | 70% 嗦粉 | 30% 城市漫步 (CityWalk) |
+
+---
+
+## 🗓️ 核心行程 / Itinerary Brief
+
+### 📍 Day 1: 抵柳与夜宵
+* **午餐**：西环肥仔 (老字号，第一口震撼)
+* **打卡**：马鞍山落日 (俯瞰柳江 U 型全景)
+* **夜宵**：胜利烧烤城 (卢姐炒冰 + 姐妹烧烤)
+
+### 📍 Day 2: 烟火集市
+* **早餐**：青云民生集市 (露水汤圆、五色糯米饭)
+* **打卡**：柳州工业博物馆 (硬核工业美学)
+* **晚餐**：肥螺庄鸭脚煲 (必喝冰豆奶)
+
+### 📍 Day 3: 深度嗦粉
+* **体验**：2 元水上巴士环江游 (性价比极高)
+* **下午茶**：韦韦木薯羹 (解辣降火利器)
+* **晚餐**：新实惠凉拌牛杂 (柳州人的肉食浪漫)
+
+---
+
+## 🥢 必吃通关进度 / Must-Eat Checklist
+- [ ] 标配螺蛳粉 (必加炸蛋与腐竹)
+- [ ] 大华干捞粉 (甜口叉烧碎)
+- [ ] 卢姐炒冰 (牛油果椰汁味)
+- [ ] 露水汤圆 (鲜肉咸口)
+- [ ] 软烂鸭脚煲 (带皮炸过更好吃)
+- [ ] 凉拌牛杂 + 切粉
+- [ ] 韦韦木薯羹 (Q弹爽滑)
+- [ ] 谢民水果酸 (柳州酸嘢)
+
+---
